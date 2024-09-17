@@ -56,3 +56,8 @@ Nexus is a comprehensive project management tool designed to track work progress
    ```bash
    git clone https://github.com/yourusername/nexus.git
    cd nexus
+
+2. Install the dependencies:
+   ```bash
+   npm install
+   
