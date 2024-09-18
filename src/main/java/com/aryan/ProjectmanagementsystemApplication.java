@@ -8,5 +8,4 @@ public class ProjectmanagementsystemApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectmanagementsystemApplication.class, args);
 	}
-
 }
