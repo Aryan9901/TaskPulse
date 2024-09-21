@@ -9,5 +9,5 @@ public interface CommentService {
 
     void deleteComment(Long commentId, Long userId) throws Exception;
 
-    List<Comment> findCommentByIssue(Long issueId) throws Exception;
+    List<Comment> findCommentByIssueId(Long issueId) throws Exception;
 }

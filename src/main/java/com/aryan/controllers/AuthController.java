@@ -21,6 +21,7 @@ import com.aryan.repository.UserRepository;
 import com.aryan.request.LoginRequest;
 import com.aryan.response.AuthResponse;
 import com.aryan.service.CustomUserDetailsImpl;
+import com.aryan.service.SubscriptionService;
 
 @RestController
 @RequestMapping("/auth")
@@ -33,6 +34,9 @@ public class AuthController {
 
     @Autowired
     private CustomUserDetailsImpl customUserDetailsImpl;
+
+    @Autowired
+    private SubscriptionService subscriptionService;;
 
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws Exception {
@@ -48,6 +52,8 @@ public class AuthController {
         createdUser.setFullname(user.getFullname());
 
         User savedUser = userRepository.save(createdUser);
+
+        subscriptionService.createSubscription(savedUser);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);

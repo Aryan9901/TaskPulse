@@ -81,7 +81,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> findCommentByIssue(Long issueId) throws Exception {
+    public List<Comment> findCommentByIssueId(Long issueId) throws Exception {
         return commentRepository.findCommentByIssueId(issueId);
     }
 
