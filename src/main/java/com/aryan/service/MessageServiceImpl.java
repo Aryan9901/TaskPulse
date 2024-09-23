@@ -4,6 +4,7 @@ import java.util.List;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.aryan.models.Chat;
 import com.aryan.models.Message;
@@ -11,6 +12,7 @@ import com.aryan.models.User;
 import com.aryan.repository.MessageRepository;
 import com.aryan.repository.UserRepository;
 
+@Service
 public class MessageServiceImpl implements MessageService {
 
     @Autowired

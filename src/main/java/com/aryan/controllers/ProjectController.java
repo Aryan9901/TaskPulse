@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/project")
+@RequestMapping("/api/projects")
 public class ProjectController {
     @Autowired
     private ProjectService projectService;

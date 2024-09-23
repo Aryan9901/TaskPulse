@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aryan.dto.IssueDTO;
 import com.aryan.models.Issue;
 import com.aryan.models.User;
+import com.aryan.repository.IssueRepository;
 import com.aryan.request.IssueRequest;
 import com.aryan.response.AuthResponse;
 import com.aryan.response.MessageResponse;
@@ -29,13 +30,23 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
-@RequestMapping("/api/issue")
+@RequestMapping("/api/issues")
 public class IssueController {
     @Autowired
     IssueService issueService;
 
     @Autowired
+    private IssueRepository issueRepository;
+
+    @Autowired
     private UserService userService;
+
+    @GetMapping
+    public ResponseEntity<List<Issue>> getAllIssues() throws Exception {
+        List<Issue> issues = issueRepository.findAll();
+
+        return ResponseEntity.ok(issues);
+    }
 
     @GetMapping("/{issueId}")
     public ResponseEntity<Issue> getIssueById(@PathVariable long issueId) throws Exception {
@@ -47,7 +58,7 @@ public class IssueController {
         return ResponseEntity.ok(issueService.getIssueByProjectId(projectId));
     }
 
-    @PostMapping("path")
+    @PostMapping()
     public ResponseEntity<IssueDTO> createIssue(@RequestBody IssueRequest issue,
             @RequestHeader("Authorization") String token) throws Exception {
         System.out.println("issue ----> " + issue);
@@ -56,14 +67,14 @@ public class IssueController {
         User user = userService.findUserById(tokenUser.getId());
 
         // if (user != null) {
-        Issue createdIssue = issueService.createIssue(issue, tokenUser);
+        Issue createdIssue = issueService.createIssue(issue, user);
         IssueDTO issueDTO = new IssueDTO();
         issueDTO.setDescription(createdIssue.getDescription());
         issueDTO.setDueDate(createdIssue.getDueDate());
         issueDTO.setId(createdIssue.getId());
         issueDTO.setPriority(createdIssue.getPriority());
         issueDTO.setProject(createdIssue.getProject());
-        issueDTO.setProjectId(createdIssue.getProjectId());
+        issueDTO.setProjectId(createdIssue.getProjId());
         issueDTO.setStatus(createdIssue.getStatus());
         issueDTO.setTitle(createdIssue.getTitle());
         issueDTO.setTags(createdIssue.getTags());
@@ -76,7 +87,8 @@ public class IssueController {
     }
 
     @DeleteMapping("/{issueId}")
-    public ResponseEntity<MessageResponse> deleteIssue(@PathVariable Long issueId, @RequestHeader String token)
+    public ResponseEntity<MessageResponse> deleteIssue(@PathVariable Long issueId,
+            @RequestHeader("Authorization") String token)
             throws Exception {
         User user = userService.findUserProfileByJwt(token);
         issueService.deleteIssue(issueId, user.getId());
@@ -101,5 +113,4 @@ public class IssueController {
         Issue issue = issueService.updateStatus(issueId, status);
         return ResponseEntity.ok(issue);
     }
-
 }

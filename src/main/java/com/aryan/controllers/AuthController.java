@@ -22,6 +22,8 @@ import com.aryan.request.LoginRequest;
 import com.aryan.response.AuthResponse;
 import com.aryan.service.CustomUserDetailsImpl;
 import com.aryan.service.SubscriptionService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/auth")
@@ -36,7 +38,7 @@ public class AuthController {
     private CustomUserDetailsImpl customUserDetailsImpl;
 
     @Autowired
-    private SubscriptionService subscriptionService;;
+    private SubscriptionService subscriptionService;
 
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws Exception {

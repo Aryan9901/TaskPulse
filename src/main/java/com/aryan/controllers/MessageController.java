@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 @RequestMapping("/api/messages")
 public class MessageController {
+
     @Autowired
     private MessageService messageService;
 
@@ -51,7 +52,7 @@ public class MessageController {
     }
 
     @GetMapping("/chat/{projectId}")
-    public ResponseEntity<List<Message>> getMessagesByChatId(@PathVariable Long projectId) throws Exception {
+    public ResponseEntity<List<Message>> getMessagesByProjectId(@PathVariable Long projectId) throws Exception {
         List<Message> messages = messageService.getMessagesByProjectId(projectId);
         return ResponseEntity.ok(messages);
     }

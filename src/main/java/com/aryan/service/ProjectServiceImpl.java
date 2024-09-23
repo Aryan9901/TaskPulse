@@ -28,7 +28,8 @@ public class ProjectServiceImpl implements ProjectService {
     public Project createProject(Project project, User user) throws Exception {
         Project createdProject = new Project();
 
-        createdProject.setOwner(project.getOwner());
+        createdProject.setName(project.getName());
+        createdProject.setOwner(user);
         createdProject.setTags(project.getTags());
         createdProject.setCategory(project.getCategory());
         createdProject.setDescription(project.getDescription());
@@ -37,13 +38,14 @@ public class ProjectServiceImpl implements ProjectService {
         Project savedProject = projectRepository.save(createdProject);
 
         Chat chat = new Chat();
+        // need to remove below line
+        chat.setName(project.getName() + "_chat");
         chat.setProject(savedProject);
 
         Chat projectChat = chatService.createChat(chat);
         savedProject.setChat(projectChat);
 
         return projectRepository.save(savedProject);
-
     }
 
     @Override
