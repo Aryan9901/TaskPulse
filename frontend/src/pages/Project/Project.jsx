@@ -4,7 +4,7 @@ import ProjectFilter from './ProjectFilter'
 
 export default function Project() {
     return (
-        <div className="relative w-full flex gap-5 justify-start">
+        <div className="relative w-full flex justify-start">
             <ProjectFilter />
             <ProjectList />
         </div>

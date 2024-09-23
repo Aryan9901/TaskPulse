@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Convergence:700|Convergence:400');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,6 +9,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+
+body {
+  font-family: 'Convergence';
+  font-weight: 400;
 }
 
 html,
@@ -23,22 +32,28 @@ body {
   display: none;
 }
 
+.active>button {
+  color: hsl(263.4, 70%, 50.4%);
+  transition: all .3s linear;
+  text-decoration: underline;
+}
+
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 224 71.4% 4.1%;
+    --background: 236, 100%, 97%;
+    --foreground: 240, 100%, 6%;
     --card: 0 0% 100%;
     --card-foreground: 224 71.4% 4.1%;
     --popover: 0 0% 100%;
     --popover-foreground: 224 71.4% 4.1%;
-    --primary: 262.1 83.3% 57.8%;
+    --primary: 240, 97%, 29%;
     --primary-foreground: 210 20% 98%;
-    --secondary: 220 14.3% 95.9%;
+    --secondary: 274, 24%, 81%;
     --secondary-foreground: 220.9 39.3% 11%;
     --muted: 220 14.3% 95.9%;
     --muted-foreground: 220 8.9% 46.1%;
-    --accent: 220 14.3% 95.9%;
+    --accent: 356, 98%, 49%;
     --accent-foreground: 220.9 39.3% 11%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 20% 98%;
@@ -54,20 +69,20 @@ body {
   }
 
   .dark {
-    --background: 224 71.4% 4.1%;
     /* --background: 224 71.4% 4.1%; */
-    --foreground: 210 20% 98%;
+    --background: 236, 100%, 3%;
+    --foreground: 240, 100%, 94%;
     --card: 224 71.4% 4.1%;
     --card-foreground: 210 20% 98%;
     --popover: 224 71.4% 4.1%;
     --popover-foreground: 210 20% 98%;
-    --primary: 263.4 70% 50.4%;
+    --primary: 240, 97%, 71%;
     --primary-foreground: 210 20% 98%;
-    --secondary: 215 27.9% 16.9%;
+    --secondary: 273, 23%, 19%;
     --secondary-foreground: 210 20% 98%;
     --muted: 215 27.9% 16.9%;
     --muted-foreground: 217.9 10.6% 64.9%;
-    --accent: 215 27.9% 16.9%;
+    --accent: 356, 98%, 51%;
     --accent-foreground: 210 20% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 20% 98%;
@@ -81,6 +96,7 @@ body {
     --chart-5: 340 75% 55%;
   }
 }
+
 
 
 @layer base {

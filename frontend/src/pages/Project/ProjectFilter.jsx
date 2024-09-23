@@ -6,9 +6,12 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Typography } from '@/components/ui/Typography';
 import { MixerHorizontalIcon } from '@radix-ui/react-icons';
+import { useTheme } from "@/context/ThemeProvider";
 import React from 'react';
 
 export default function ProjectFilter() {
+    const { theme } = useTheme();
+
     // State to hold filter options
     const [filters, setFilters] = useState([
         {
@@ -48,7 +51,7 @@ export default function ProjectFilter() {
 
     return (
         <section className='w-[17rem]'>
-            <Card className="p-5 pb-0 sticky top-10 rounded-none">
+            <Card className={`p-5 pb-0 sticky top-10 rounded-none ${theme == "dark" ? "bg-gray-900" : "bg-secondary"}`}>
                 <CardHeader className='flex-row items-center p-0 justify-between '>
                     <Typography variant="h3">Filters</Typography>
                     <Button size="icon" variant="ghost">
