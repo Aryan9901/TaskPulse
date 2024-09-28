@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { CaretSortIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import ProjectCard from "@/pages/Project/ProjectCard";
+import { Link } from "react-router-dom";
 
 export default function ProjectList() {
   const [keyword, setKeyword] = useState("");
@@ -14,15 +15,20 @@ export default function ProjectList() {
         <div className="relative px-2-0 flex items-center justify-start gap-6  w-full ">
           <Input
             type="text"
-            className="w-[60%] py-6 pl-10 rounded-sm focus:outline-none focus:ring-0 focus:border-[2px] focus-visible:ring-0 border-[1.2px] border-secondary"
+            className="w-[60%] py-6 pl-10 rounded-sm focus:outline-none focus:ring-1 focus-visible:ring-1 border-[1.2px] border-secondary"
             placeholder="Search Project"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
           />
           <MagnifyingGlassIcon className="absolute top-1/2 -translate-y-1/2 left-4" />
-          <Button className="flex items-center gap-2 py-6 pl-8 pr-4 ml-auto text-xl hover:bg-primary hover:contrast-200">
-            Sort <CaretSortIcon className="h-8 w-8 text-2xl" />
-          </Button>
+          <button className="flex bg-primary text-white rounded-md items-center gap-2 py-2 px-6 font-bold tracking-wider ml-auto text-base hover:bg-primary hover:contrast-200">
+            Sort
+          </button>
+          <Link to="/projects/new">
+            <button className="flex bg-primary text-white rounded-md items-center gap-2 py-2 px-6 font-bold tracking-wider text-base hover:bg-primary hover:contrast-200">
+              New
+            </button>
+          </Link>
         </div>
       </div>
       <div className="">
