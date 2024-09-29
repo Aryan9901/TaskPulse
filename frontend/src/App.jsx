@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import Navbar from "@/components/elements/Navbar";
 import { ThemeProvider } from "@/context/ThemeProvider";
 import Project from "./pages/Project/Project";
+import NewProject from "./pages/Project/NewProject";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Project />} />
-          <Route path="/project/new" element={<Project />} />
+          <Route path="/project/new" element={<NewProject />} />
           <Route path="/login" element={<Home />} />
         </Routes>
       </ThemeProvider>

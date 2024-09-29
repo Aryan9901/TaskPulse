@@ -24,7 +24,7 @@ export default function ProjectList() {
           <button className="flex bg-primary text-white rounded-md items-center gap-2 py-2 px-6 font-bold tracking-wider ml-auto text-base hover:bg-primary hover:contrast-200">
             Sort
           </button>
-          <Link to="/projects/new">
+          <Link to="/project/new">
             <button className="flex bg-primary text-white rounded-md items-center gap-2 py-2 px-6 font-bold tracking-wider text-base hover:bg-primary hover:contrast-200">
               New
             </button>

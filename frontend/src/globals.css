@@ -108,3 +108,13 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+.css-13cymwt-control{
+  background:var(--background) !important ;
+}
+
+.select__menu > div{
+  background: #fff !important;
+  color: black !important;
+}
