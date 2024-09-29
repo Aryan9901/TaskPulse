@@ -28,10 +28,15 @@ export default function ProjectDetails() {
       content: <TaskContainer />,
       icon: ListChecks, // You can import and use any icon component here
     },
+    {
+      label: "Source Code",
+      content: <div>source code</div>,
+      icon: ListChecks, // You can import and use any icon component here
+    },
   ];
 
   return (
-    <main className="projectDetails w-full dark:bg-black bg-[#fcfcfc] h-full">
+    <main className="projectDetails w-full dark:bg-black bg-[#fcfcfc] min-h-full">
       <section className="projectHeading px-8 py-6 w-full">
         <h2 className="text-3xl text-primary">Nexus</h2>
         <p className="text-base dark:text-gray-300 text-gray-600 my-3 max-w-xl w-full">

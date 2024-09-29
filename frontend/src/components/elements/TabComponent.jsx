@@ -10,9 +10,9 @@ export const TabComponent = ({ tabs }) => {
         {tabs.map((tab, index) => (
           <button
             key={index}
-            className={`px-6 py-2 border-none text-sm font-medium hover:text-blue-600 focus:outline-none ${
+            className={`px-6 py-2 mx-2 transition-all duration-300 border-none text-sm font-medium hover:border-b-2 focus:outline-none ${
               activeTab === index
-                ? "border-b-2 px-8 dark:text-primary text-background font-bold dark:bg-white bg-primary rounded-t-md"
+                ? "border-b-2 dark:text-primary text-background font-bold dark:bg-white bg-primary rounded-t-md"
                 : "border-transparent"
             }`}
             onClick={() => setActiveTab(index)}
