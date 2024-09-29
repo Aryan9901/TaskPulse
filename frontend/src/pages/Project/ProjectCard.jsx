@@ -5,9 +5,11 @@ import { DotFilledIcon, DotsVerticalIcon } from "@radix-ui/react-icons";
 
 import { DropMenu } from "@/components/elements/DropMenu";
 import { ReusableContextMenu } from "../../components/elements/ReusableContextMenu";
+import { Link } from "react-router-dom";
 
 export default function ProjectCard({
   tags = ["Java", "Reactjs", "Springboot", "Sass"],
+  project,
 }) {
   const handleUpdateClick = () => {
     console.log("Profile clicked");
@@ -37,12 +39,12 @@ export default function ProjectCard({
       <div className="flex justify-start items-center">
         <div className="flex items-center space-x-4">
           <ReusableContextMenu menuItems={menuItems}>
-            <a
-              href="#"
+            <Link
+              to={`/project/${project}`}
               className="text-primary text-xl font-semibold hover:underline"
             >
               Nexus
-            </a>
+            </Link>
           </ReusableContextMenu>
           <span className="bg-foreground text-background text-sm px-3 py-[3px] rounded-full">
             Public

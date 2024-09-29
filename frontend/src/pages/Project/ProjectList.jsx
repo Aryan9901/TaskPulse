@@ -35,8 +35,10 @@ export default function ProjectList() {
         {/* <div className="space-y-5  min-h-[71.4vh]"> */}
         <ScrollArea className="h-[71.4vh] no-scrollbar overflow-auto">
           {keyword
-            ? [1, 2, 3].map((item) => <ProjectCard key={item} />)
-            : [1, 2, 3, 4].map((item) => <ProjectCard key={item} />)}
+            ? [1, 2, 3].map((item) => <ProjectCard key={item} project={item} />)
+            : [1, 2, 3, 4].map((item) => (
+                <ProjectCard key={item} project={item} />
+              ))}
         </ScrollArea>
       </div>
     </section>
