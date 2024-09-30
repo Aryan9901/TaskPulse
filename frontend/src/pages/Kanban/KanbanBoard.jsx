@@ -163,18 +163,17 @@ const KanbanBoard = () => {
           return (
             <div
               key={colId}
-              className="min-w-[290px] w-[80%] sm:w-[45%] lg:w-1/3 xl:w-1/4 lg:max-w-[300px] rounded py-2 shadow bg-secondary"
+              className="min-w-[290px] w-[80%] sm:w-[45%] lg:w-1/3 xl:w-1/4 lg:max-w-[300px] rounded py-2 shadow dark:bg-secondary bg-background"
             >
               <h2
-                className={`text-base flex gap-3 pl-4 font-medium my-2 ${
-                  column.title == "Not Started"
-                    ? "text-accent"
-                    : column.title == "In Progress"
+                className={`text-base flex gap-3 pl-4 font-medium my-2 ${column.title == "Not Started"
+                  ? "text-red-700"
+                  : column.title == "In Progress"
                     ? "text-primary"
                     : column.title == "In Review"
-                    ? "text-yellow-600"
-                    : "text-green-500"
-                }`}
+                      ? "text-yellow-600"
+                      : "text-green-500"
+                  }`}
               >
                 <CircleDot />
                 {column.title}
@@ -193,7 +192,7 @@ const KanbanBoard = () => {
                           {showForm ? (
                             <div className="mb-2">
                               <input
-                                className="border mb-2 p-2 w-full"
+                                className="border-b-2 border-primary focus:outline-none placeholder:text-gray-200 placeholder:font-normal bg-transparent mb-2 p-2 w-full"
                                 type="text"
                                 placeholder="Task Name"
                                 name="name"
@@ -201,7 +200,7 @@ const KanbanBoard = () => {
                                 onChange={handleInputChange}
                               />
                               <input
-                                className="border mb-2 p-2 w-full"
+                                className="border-b-2 border-primary focus:outline-none placeholder:text-gray-200 placeholder:font-normal bg-transparent mb-2 p-2 w-full"
                                 type="text"
                                 placeholder="Task Description"
                                 name="description"
@@ -248,7 +247,7 @@ const KanbanBoard = () => {
                                 ref={provided.innerRef}
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
-                                className="bg-white text-background py-2 px-2 mb-2 rounded shadow"
+                                className="dark:bg-white dark:text-background bg-white text-foreground py-2 px-2 mb-2 rounded shadow"
                               >
                                 <h3 className="font-semibold">{item.name}</h3>
                                 <p className="text-sm">{item.description}</p>

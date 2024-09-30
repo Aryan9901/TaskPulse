@@ -37,7 +37,7 @@ export function ReusableContextMenu({
                 key={index}
                 checked={item.checked}
                 onClick={item.onClick}
-                className="focus:bg-primary focus:visible-primary"
+                className="focus:bg-primary  focus:visible-primary"
               >
                 {item.label}
                 {item.shortcut && (
@@ -54,13 +54,13 @@ export function ReusableContextMenu({
                 key={index}
                 value={item.value}
                 onValueChange={item.onChange}
-                className="focus:bg-primary focus:visible-primary"
+                className="focus:bg-primary  focus:visible-primary"
               >
                 <ContextMenuLabel inset>{item.label}</ContextMenuLabel>
                 <ContextMenuSeparator />
                 {item.options.map((option, optIndex) => (
                   <ContextMenuRadioItem
-                    className="w-48 focus:bg-primary focus:visible-primary"
+                    className="w-48 focus:bg-primary  focus:visible-primary"
                     key={optIndex}
                     value={option.value}
                   >
@@ -107,7 +107,7 @@ export function ReusableContextMenu({
           // Default to normal items
           return (
             <ContextMenuItem
-              className="focus:bg-primary focus:visible-primary"
+              className="focus:bg-primary focus:text-white cursor-pointer hover:text-white focus:visible-primary"
               key={index}
               inset
               onClick={item.onClick}
