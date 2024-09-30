@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import ShowMoreText from "react-show-more-text";
-import { ListChecks } from "lucide-react";
+import { ListChecks, PlusIcon } from "lucide-react";
 import { ChevronDown } from "lucide-react";
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import {
   Popover,
   PopoverContent,
@@ -11,6 +12,8 @@ import {
 } from "@/components/ui/popover";
 import { TabComponent } from "../../components/elements/TabComponent";
 import TaskContainer from "../Task/TaskContainer";
+import InviteUserForm from "../Invitation/InviteUserForm";
+import { ChatApp } from "../Chat/ChatApp";
 
 const users = [
   { name: "User 1", avatar: "https://github.com/shadcn.png" },
@@ -36,7 +39,7 @@ export default function ProjectDetails() {
   ];
 
   return (
-    <main className="projectDetails w-full dark:bg-black bg-[#fcfcfc] min-h-full">
+    <main className="projectDetails relative w-full dark:bg-black bg-[#fcfcfc] min-h-full">
       <section className="projectHeading px-8 py-6 w-full">
         <h2 className="text-3xl text-primary">Nexus</h2>
         <p className="text-base dark:text-gray-300 text-gray-600 my-3 max-w-xl w-full">
@@ -71,19 +74,30 @@ export default function ProjectDetails() {
               </Avatar>
             ))}
             {/* Down arrow button to toggle the user list */}
-            <PopoverMenu>
+            {/* <PopoverMenu>
               <button className="">
-                <ChevronDown className="ml-6 h-5 w-5 text-foreground" />
+                <ChevronDown className="ml-5 h-5 w-5 text-foreground" />
               </button>
-            </PopoverMenu>
+            </PopoverMenu> */}
+            <Dialog>
+              <DialogTrigger>
+                <button className="rounded-full flex gap-2 items-center px-4 ml-7 py-1 border border-primary text-sm text-foreground bg-background">Invite <PlusIcon size={15} /></button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Invite Members</DialogTitle>
+                </DialogHeader>
+                <InviteUserForm />
+              </DialogContent>
+            </Dialog>
           </div>
         </span>
         <span className="grid grid-cols-8 items-center gap-6 mb-4 mt-4">
           <h3>Category: </h3> Full Stack
         </span>
         <span className="grid grid-cols-8 items-center gap-6 mb-4">
-          <h3>Status: </h3>{" "}
-          <button className="rounded-full px-1 py-1 border border-primary">
+          <h3>Status: </h3>
+          <button className="rounded-full px-0 py-1 border border-primary text-white bg-primary">
             In Progress
           </button>
         </span>
@@ -91,6 +105,9 @@ export default function ProjectDetails() {
       <section>
         <TabComponent tabs={tabs} />
       </section>
+      <ChatApp>
+        <button className="fixed bottom-12 right-12" variant="outline">Chat with us</button>
+      </ChatApp>
     </main>
   );
 }

@@ -2,66 +2,52 @@ import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { ReusableContextMenu } from "@/components/elements/ReusableContextMenu";
 import { CircleDot } from "lucide-react";
+import { DotsVerticalIcon } from "@radix-ui/react-icons";
+import { KanbanDropdown } from "./KanbanDropdown";
+// import { EditTask } from "../../components/elements/EditTask";
 
 const KanbanBoard = () => {
   const initialData = {
     backlog: {
       title: "Not Started",
       items: [
-        { name: "Task 1", description: "Description of Task 1" },
-        { name: "Task 2", description: "Description of Task 2" },
+        { id: 1, name: "Task 1", description: "Description of Task 1" },
+        { id: 2, name: "Task 2", description: "Description of Task 2" },
       ],
     },
     inProgress: {
       title: "In Progress",
-      items: [{ name: "Task 3", description: "Description of Task 3" }],
+      items: [{ id: 3, name: "Task 3", description: "Description of Task 3" }],
     },
     inReview: {
       title: "In Review",
-      items: [{ name: "Task 4", description: "Description of Task 4" }],
+      items: [{ id: 4, name: "Task 4", description: "Description of Task 4" }],
     },
     done: {
       title: "Done",
-      items: [{ name: "Task 5", description: "Description of Task 5" }],
+      items: [{ id: 5, name: "Task 5", description: "Description of Task 5" }],
     },
   };
 
   const [columns, setColumns] = useState(initialData);
   const [newTask, setNewTask] = useState({ name: "", description: "" });
   const [showForm, setShowForm] = useState(false);
+  const [editTask, setEditTask] = useState(null); // For editing tasks
 
-  // Log operation function (can be an API call, log, or any other operation)
+  // Log operation function
   const logOperation = (source, destination, movedItem) => {
     const isSameColumn = source.droppableId === destination.droppableId;
-
-    switch (true) {
-      case isSameColumn:
-        console.log(`Item moved within the same column: ${source.droppableId}`);
-        console.log("Moved Item:", movedItem);
-        break;
-
-      case !isSameColumn:
-        console.log(
-          `Item moved to a different column: From ${source.droppableId} to ${destination.droppableId}`
-        );
-        console.log("Moved Item:", movedItem);
-        break;
-
-      default:
-        console.log("Unexpected operation.");
-    }
+    console.log(
+      `Item moved ${isSameColumn ? "within the same column" : "to a different column"}`
+    );
+    console.log("Moved Item:", movedItem);
   };
 
   // Handle drag end event
   const onDragEnd = (result) => {
     const { source, destination } = result;
-
     if (!destination) return;
-
-    if (
-      source.droppableId === destination.droppableId &&
-      source.index === destination.index
-    ) {
+    if (source.droppableId === destination.droppableId && source.index === destination.index) {
       return;
     }
 
@@ -126,12 +112,21 @@ const KanbanBoard = () => {
     }
   };
 
-  // Function to generate the context menu items dynamically
+  // Function to generate the context menu items dynamically, including move options
   const generateContextMenuItems = (task, sourceColumnId) => {
-    return Object.keys(columns).map((colId) => ({
+    const moveOptions = Object.keys(columns).map((colId) => ({
       label: `Move to ${columns[colId].title}`,
       onClick: () => moveTaskToColumn(task, sourceColumnId, colId),
     }));
+
+    const menuItems = [
+      // { label: "Edit", onClick: () => handleEditTask(task, sourceColumnId) },
+      { label: "Edit", onClick: () => null },
+      { label: "Delete", onClick: () => handleDeleteTask(task, sourceColumnId) },
+      ...moveOptions, // Add move options to the context menu
+    ];
+
+    return menuItems;
   };
 
   // Handle new task input change
@@ -147,12 +142,52 @@ const KanbanBoard = () => {
         ...prev,
         backlog: {
           ...prev.backlog,
-          items: [...prev.backlog.items, { ...newTask }],
+          items: [...prev.backlog.items, { id: Date.now(), ...newTask }],
         },
       }));
       setNewTask({ name: "", description: "" }); // Clear form
       setShowForm(false); // Close form after submission
     }
+  };
+
+  // Edit task handler
+  const handleEditTask = (task, columnId) => {
+    setEditTask({ task, columnId });
+    setNewTask({ name: task.name, description: task.description });
+    setShowForm(true);
+  };
+
+  // Update task after edit
+  const updateTask = () => {
+    const { task, columnId } = editTask;
+    const updatedItems = columns[columnId].items.map((item) =>
+      item.id === task.id ? { ...item, ...newTask } : item
+    );
+
+    setColumns((prev) => ({
+      ...prev,
+      [columnId]: {
+        ...prev[columnId],
+        items: updatedItems,
+      },
+    }));
+
+    setEditTask(null); // Clear edit task state
+    setNewTask({ name: "", description: "" });
+    setShowForm(false);
+  };
+
+  // Delete task handler
+  const handleDeleteTask = (task, columnId) => {
+    const updatedItems = columns[columnId].items.filter((item) => item.id !== task.id);
+
+    setColumns((prev) => ({
+      ...prev,
+      [columnId]: {
+        ...prev[columnId],
+        items: updatedItems,
+      },
+    }));
   };
 
   return (
@@ -166,11 +201,11 @@ const KanbanBoard = () => {
               className="min-w-[290px] w-[80%] sm:w-[45%] lg:w-1/3 xl:w-1/4 lg:max-w-[300px] rounded py-2 shadow dark:bg-secondary bg-background"
             >
               <h2
-                className={`text-base flex gap-3 pl-4 font-medium my-2 ${column.title == "Not Started"
+                className={`text-base flex gap-3 pl-4 font-medium my-2 ${column.title === "Not Started"
                   ? "text-red-700"
-                  : column.title == "In Progress"
+                  : column.title === "In Progress"
                     ? "text-primary"
-                    : column.title == "In Review"
+                    : column.title === "In Review"
                       ? "text-yellow-600"
                       : "text-green-500"
                   }`}
@@ -186,7 +221,6 @@ const KanbanBoard = () => {
                       {...provided.droppableProps}
                       className="py-2 px-0 rounded"
                     >
-                      {/* Render form at the top of the backlog column */}
                       {colId === "backlog" && (
                         <>
                           {showForm ? (
@@ -208,12 +242,21 @@ const KanbanBoard = () => {
                                 onChange={handleInputChange}
                               />
                               <div className="flex justify-end">
-                                <button
-                                  className="bg-green-500 text-white px-2 py-1 rounded mr-2"
-                                  onClick={addNewTask}
-                                >
-                                  Add
-                                </button>
+                                {editTask ? (
+                                  <button
+                                    className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
+                                    onClick={updateTask}
+                                  >
+                                    Update
+                                  </button>
+                                ) : (
+                                  <button
+                                    className="bg-green-500 text-white px-2 py-1 rounded mr-2"
+                                    onClick={addNewTask}
+                                  >
+                                    Add
+                                  </button>
+                                )}
                                 <button
                                   className="bg-red-500 text-white px-2 py-1 rounded"
                                   onClick={() => setShowForm(false)}
@@ -234,23 +277,29 @@ const KanbanBoard = () => {
                       )}
 
                       {column.items.map((item, index) => (
-                        <Draggable
-                          key={item.name}
-                          draggableId={item.name}
-                          index={index}
-                        >
+                        <Draggable key={item.id} draggableId={item.name} index={index}>
                           {(provided) => (
-                            <ReusableContextMenu
-                              menuItems={generateContextMenuItems(item, colId)}
-                            >
+                            <ReusableContextMenu menuItems={generateContextMenuItems(item, colId)}>
                               <div
                                 ref={provided.innerRef}
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
-                                className="dark:bg-white dark:text-background bg-white text-foreground py-2 px-2 mb-2 rounded shadow"
+                                className="dark:bg-white dark:text-background bg-white text-foreground py-2 px-2 mb-2 rounded shadow relative"
                               >
                                 <h3 className="font-semibold">{item.name}</h3>
                                 <p className="text-sm">{item.description}</p>
+
+                                {/* Three-dot dropdown menu for edit/delete/move options */}
+                                <div className="absolute top-2 right-2">
+                                  <KanbanDropdown
+                                    triggerIcon={DotsVerticalIcon}
+                                    menuItems={generateContextMenuItems(item, colId)}
+                                    setColumns={setColumns}
+                                    task={item}
+                                    columnId={colId}
+                                    columns={columns}
+                                  />
+                                </div>
                               </div>
                             </ReusableContextMenu>
                           )}
