@@ -30,6 +30,17 @@ Nexus is a project management tool designed to enhance team collaboration and wo
 ![Nexus Dashboard](https://github.com/Aryan9901/Nexus/blob/main/screenshots/Screenshot%202024-10-03%20130429.png)
 ![Nexus Dashboard](https://github.com/Aryan9901/Nexus/blob/main/screenshots/Screenshot%202024-10-03%20130437.png)
 
+## Future Scope
+We are committed to innovating every feature due in the next version of Nexus released, on top of driving the way teams (and individuals) manage their projects even more precisely and efficiently. If you are busy take a peek at what is coming:
+
+- **Project Uploads:** Going into 2019 we will begin to seamlessly integrate the ability for users to upload their project files directly to Nexus providing even more control and visibility on where things are with any given task — all within one place.
+
+- **Pro Plagiarism Check :** For originality & accountability, use of advance plagiarism check algorithms. By allowing automatic verification of the code and content uniqueness itself at each submission, users can be more confident in the integrity of what they're working with.
+
+- **More Collaboration Features:** With Nexus, collaboration will be more intuitive and efficient as it adds real-time communication and improved project-sharing capabilities.
+
+In the future, we will integrate AI that will work its magic to suggest next steps, optimize deadlines and automation of anyone-off tasks so your teams can focus more on building what users love.
+
 ## Installation
 
 ### Backend (Spring Boot)
