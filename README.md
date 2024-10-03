@@ -2,7 +2,7 @@
 
 Nexus is a project management tool designed to enhance team collaboration and work tracking. It enables admins to assign projects, set deadlines, and monitor progress through GitHub integration, with features like Razorpay subscription plans and Microsoft Clarity insights. Nexus can be used by teams or solo users to track projects efficiently.
 
-![Nexus Dashboard](./assets/dashboard_screenshot.png)
+![Nexus Dashboard](https://github.com/Aryan9901/Nexus/blob/main/screenshots/Screenshot%202024-10-03%20130335.png)
 
 ## Features
 - **Task Management**: Create projects, assign tasks, and set deadlines.
@@ -24,6 +24,11 @@ Nexus is a project management tool designed to enhance team collaboration and wo
 - **Analytics**: Microsoft Clarity
 - **Version Control Integration**: GitHub API
 - **HTTP Client**: Axios
+
+## Screenshots
+![Nexus Dashboard](https://github.com/Aryan9901/Nexus/blob/main/screenshots/Screenshot%202024-10-03%20130404.png)
+![Nexus Dashboard](https://github.com/Aryan9901/Nexus/blob/main/screenshots/Screenshot%202024-10-03%20130429.png)
+![Nexus Dashboard](https://github.com/Aryan9901/Nexus/blob/main/screenshots/Screenshot%202024-10-03%20130437.png)
 
 ## Installation
 
