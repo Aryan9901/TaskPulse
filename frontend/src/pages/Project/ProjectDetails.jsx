@@ -4,7 +4,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import ShowMoreText from "react-show-more-text";
 import { ListChecks, PlusIcon } from "lucide-react";
 import { ChevronDown } from "lucide-react";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   Popover,
   PopoverContent,
@@ -74,14 +80,16 @@ export default function ProjectDetails() {
               </Avatar>
             ))}
             {/* Down arrow button to toggle the user list */}
-            {/* <PopoverMenu>
+            <PopoverMenu>
               <button className="">
                 <ChevronDown className="ml-5 h-5 w-5 text-foreground" />
               </button>
-            </PopoverMenu> */}
+            </PopoverMenu>
             <Dialog>
               <DialogTrigger>
-                <button className="rounded-full flex gap-2 items-center px-4 ml-7 py-1 border border-primary text-sm text-foreground bg-background">Invite <PlusIcon size={15} /></button>
+                <button className="rounded-full flex gap-2 items-center px-4 ml-7 py-1 border border-primary text-sm text-foreground bg-background">
+                  Invite <PlusIcon size={15} />
+                </button>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
@@ -106,7 +114,9 @@ export default function ProjectDetails() {
         <TabComponent tabs={tabs} />
       </section>
       <ChatApp>
-        <button className="fixed bottom-12 right-12" variant="outline">Chat with us</button>
+        <button className="fixed bottom-12 right-12" variant="outline">
+          Chat with us
+        </button>
       </ChatApp>
     </main>
   );

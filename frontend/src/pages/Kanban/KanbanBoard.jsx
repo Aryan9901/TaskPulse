@@ -4,6 +4,7 @@ import { ReusableContextMenu } from "@/components/elements/ReusableContextMenu";
 import { CircleDot } from "lucide-react";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import { KanbanDropdown } from "./KanbanDropdown";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 // import { EditTask } from "../../components/elements/EditTask";
 
 const KanbanBoard = () => {
@@ -38,7 +39,9 @@ const KanbanBoard = () => {
   const logOperation = (source, destination, movedItem) => {
     const isSameColumn = source.droppableId === destination.droppableId;
     console.log(
-      `Item moved ${isSameColumn ? "within the same column" : "to a different column"}`
+      `Item moved ${
+        isSameColumn ? "within the same column" : "to a different column"
+      }`
     );
     console.log("Moved Item:", movedItem);
   };
@@ -47,7 +50,10 @@ const KanbanBoard = () => {
   const onDragEnd = (result) => {
     const { source, destination } = result;
     if (!destination) return;
-    if (source.droppableId === destination.droppableId && source.index === destination.index) {
+    if (
+      source.droppableId === destination.droppableId &&
+      source.index === destination.index
+    ) {
       return;
     }
 
@@ -121,8 +127,12 @@ const KanbanBoard = () => {
 
     const menuItems = [
       // { label: "Edit", onClick: () => handleEditTask(task, sourceColumnId) },
-      { label: "Edit", onClick: () => null },
-      { label: "Delete", onClick: () => handleDeleteTask(task, sourceColumnId) },
+      // { label: "Edit", onClick: () => {
+      // } },
+      {
+        label: "Delete",
+        onClick: () => handleDeleteTask(task, sourceColumnId),
+      },
       ...moveOptions, // Add move options to the context menu
     ];
 
@@ -179,7 +189,9 @@ const KanbanBoard = () => {
 
   // Delete task handler
   const handleDeleteTask = (task, columnId) => {
-    const updatedItems = columns[columnId].items.filter((item) => item.id !== task.id);
+    const updatedItems = columns[columnId].items.filter(
+      (item) => item.id !== task.id
+    );
 
     setColumns((prev) => ({
       ...prev,
@@ -201,14 +213,15 @@ const KanbanBoard = () => {
               className="min-w-[290px] w-[80%] sm:w-[45%] lg:w-1/3 xl:w-1/4 lg:max-w-[300px] rounded py-2 shadow dark:bg-secondary bg-background"
             >
               <h2
-                className={`text-base flex gap-3 pl-4 font-medium my-2 ${column.title === "Not Started"
-                  ? "text-red-700"
-                  : column.title === "In Progress"
+                className={`text-base flex gap-3 pl-4 font-medium my-2 ${
+                  column.title === "Not Started"
+                    ? "text-red-700"
+                    : column.title === "In Progress"
                     ? "text-primary"
                     : column.title === "In Review"
-                      ? "text-yellow-600"
-                      : "text-green-500"
-                  }`}
+                    ? "text-yellow-600"
+                    : "text-green-500"
+                }`}
               >
                 <CircleDot />
                 {column.title}
@@ -277,9 +290,15 @@ const KanbanBoard = () => {
                       )}
 
                       {column.items.map((item, index) => (
-                        <Draggable key={item.id} draggableId={item.name} index={index}>
+                        <Draggable
+                          key={item.id}
+                          draggableId={item.name}
+                          index={index}
+                        >
                           {(provided) => (
-                            <ReusableContextMenu menuItems={generateContextMenuItems(item, colId)}>
+                            <ReusableContextMenu
+                              menuItems={generateContextMenuItems(item, colId)}
+                            >
                               <div
                                 ref={provided.innerRef}
                                 {...provided.draggableProps}
@@ -287,13 +306,25 @@ const KanbanBoard = () => {
                                 className="dark:bg-white dark:text-background bg-white text-foreground py-2 px-2 mb-2 rounded shadow relative"
                               >
                                 <h3 className="font-semibold">{item.name}</h3>
-                                <p className="text-sm">{item.description}</p>
+                                <div className="flex justify-between items-center my-2">
+                                  <p className="text-sm">{item.description}</p>
+                                  <Avatar>
+                                    <AvatarImage
+                                      src="https://github.com/shadcn.png"
+                                      alt="@shadcn"
+                                    />
+                                    <AvatarFallback>CN</AvatarFallback>
+                                  </Avatar>
+                                </div>
 
                                 {/* Three-dot dropdown menu for edit/delete/move options */}
                                 <div className="absolute top-2 right-2">
                                   <KanbanDropdown
                                     triggerIcon={DotsVerticalIcon}
-                                    menuItems={generateContextMenuItems(item, colId)}
+                                    menuItems={generateContextMenuItems(
+                                      item,
+                                      colId
+                                    )}
                                     setColumns={setColumns}
                                     task={item}
                                     columnId={colId}
