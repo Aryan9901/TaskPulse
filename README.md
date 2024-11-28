@@ -27,6 +27,9 @@ Nexus is a project management tool designed to enhance team collaboration and wo
 
 ## Screenshots
 ![Nexus Dashboard](https://github.com/Aryan9901/Nexus/blob/main/screenshots/Screenshot%202024-10-03%20130404.png)
+
+---
+
 ![Nexus Dashboard](https://github.com/Aryan9901/Nexus/blob/main/screenshots/Screenshot%202024-10-03%20130429.png)
 ![Nexus Dashboard](https://github.com/Aryan9901/Nexus/blob/main/screenshots/Screenshot%202024-10-03%20130437.png)
 
